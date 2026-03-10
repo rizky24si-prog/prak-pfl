@@ -1,0 +1,96 @@
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #020202;
+    background-image:
+        radial-gradient(circle at 50% 40%, rgba(0,255,255,0.15), transparent 60%),
+        radial-gradient(circle at 20% 80%, rgba(255,0,120,0.12), transparent 60%),
+        repeating-linear-gradient(
+            0deg,
+            #020202 0px,
+            #020202 2px,
+            #070707 2px,
+            #070707 4px
+        );
+    color: #00fff7;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container utama */
+.card {
+    max-width: 600px;
+    margin: 20px auto;
+    background:
+        linear-gradient(180deg,#0a0a0a,#050505);
+    padding: 20px;
+    border-radius: 0;
+    box-shadow:
+        0 0 0 3px #000,
+        0 0 0 6px #ff0055,
+        0 0 0 10px #00fff7,
+        0 0 0 14px #ffea00,
+        0 0 30px #ff0055,
+        inset 0 0 25px rgba(0,255,247,0.15),
+        inset 0 0 40px rgba(255,0,120,0.15);
+}
+
+/* Header utama */
+h1 {
+    color: #ffea00;
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 5px #ffea00,
+        0 0 15px #ffea00,
+        0 0 25px #ff0055,
+        2px 2px 0 #000,
+        4px 4px 0 #ff0055,
+        6px 6px 0 #000;
+}
+
+/* Paragraf */
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #00fff7;
+    text-shadow:
+        0 0 4px rgba(0,255,247,0.8),
+        1px 1px 0 #000,
+        2px 2px 0 #000;
+}
+
+/* Garis pemisah */
+hr {
+    border: none;
+    height: 8px;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #ff0055 0px,
+            #ff0055 10px,
+            #00fff7 10px,
+            #00fff7 20px,
+            #ffea00 20px,
+            #ffea00 30px
+        );
+    box-shadow:
+        0 0 8px #ff0055,
+        0 0 15px #00fff7,
+        0 0 25px #ffea00;
+    margin: 10px 0;
+}
+
+/* Greeting */
+small {
+    display: block;
+    font-style: italic;
+    text-align: center;
+    color: #ff0055;
+    margin-top: 5px;
+    text-shadow:
+        0 0 6px #ff0055,
+        0 0 12px #ff0055,
+        1px 1px 0 #000,
+        2px 2px 0 #000;
+}
