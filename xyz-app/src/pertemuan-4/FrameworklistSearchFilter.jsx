@@ -1,6 +1,30 @@
 import frameworkData from "./framework.json";
+import { useState } from "react";
 
-export default function Frameworklist() {
+export default function FrameworklistSearchFilter() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
+// ------------------------------------------------------------
+  const _searchTerm = searchTerm.toLowerCase();
+  const filteredFrameworks = frameworkData.filter((framework) => {
+    const matchesSearch =
+      framework.name.toLowerCase().includes(_searchTerm) ||
+      framework.description.toLowerCase().includes(_searchTerm) ||
+      framework.details.developer.toLowerCase().includes(_searchTerm) ||
+      framework.details.releaseYear.toString().includes(_searchTerm);
+
+
+    const matchesTag = selectedTag
+      ? framework.tags.includes(selectedTag)
+      : true;
+
+    return matchesSearch && matchesTag;
+  });
+// ------------------------------------------------------------
+  const allTags = [
+    ...new Set(frameworkData.flatMap((framework) => framework.tags)),
+  ];
+// ------------------------------------------------------------
   return (
     <div className="bg-gray-900 min-h-screen p-6">
       {/* Judul Halaman */}
@@ -13,7 +37,27 @@ export default function Frameworklist() {
 
       {/* Container Card */}
       <div className="max-w-3xl mx-auto space-y-5">
-        {frameworkData.map((item) => (
+        <input
+              type="text"
+              name="searchTerm"
+              placeholder="Search framework..."
+              className="w-full p-2 border border-gray-300 rounded mb-4 text-white"
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <select
+              name="selectedTag"
+              className="w-full p-2 border border-gray-300 rounded mb-4 text-white"
+              onChange={(e) => selectedTag(e.target.value)}
+            >
+              <option value="">All Tags</option>
+  {allTags.map((tag, index) => (
+    <option key={index} value={tag}>
+      {tag}
+    </option>
+  ))}
+            </select>
+
+            {filteredFrameworks.map((item) => (
           <div
             key={item.id}
             className="bg-gray-800 rounded-lg p-5 border border-gray-700 hover:border-gray-400 hover:bg-gray-800/80 hover:scale-[1.02] transition-all duration-300 cursor-pointer"
@@ -22,12 +66,12 @@ export default function Frameworklist() {
             <h2 className="text-xl font-bold text-white mb-2 hover:text-gray-300 transition-colors">
               {item.name}
             </h2>
-            
+
             {/* Deskripsi */}
             <p className="text-gray-400 mb-4 hover:text-gray-300 transition-colors">
               {item.description}
             </p>
-            
+
             {/* Informasi Developer */}
             <div className="bg-gray-900 rounded-md p-3 mb-2 hover:bg-gray-950 transition-colors">
               <span className="text-gray-500 text-sm">Developer:</span>
@@ -35,7 +79,7 @@ export default function Frameworklist() {
                 {item.details.developer}
               </p>
             </div>
-            
+
             {/* Informasi Tahun Rilis */}
             <div className="bg-gray-900 rounded-md p-3 mb-3 hover:bg-gray-950 transition-colors">
               <span className="text-gray-500 text-sm">Release Year:</span>
@@ -43,7 +87,7 @@ export default function Frameworklist() {
                 {item.details.releaseYear}
               </p>
             </div>
-            
+
             {/* Link Website */}
             <a
               href={item.details.officialWebsite}
@@ -53,7 +97,6 @@ export default function Frameworklist() {
             >
               Visit Website →
             </a>
-            
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
               {item.tags.map((tag, index) => (

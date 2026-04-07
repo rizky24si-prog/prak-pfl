@@ -1,11 +1,11 @@
 import { createRoot } from "react-dom/client";
 import './tailwind.css';
 import Frameworklist from "./Frameworklist";
+import FrameworklistSearchFilter from "./FrameworklistSearchFilter";
 
 createRoot(document.getElementById("root"))
     .render(
         <div>
-            HAI INI PERTEMUAN 4 Kby
-            <Frameworklist/>
+            <FrameworklistSearchFilter/>
         </div>
     )
