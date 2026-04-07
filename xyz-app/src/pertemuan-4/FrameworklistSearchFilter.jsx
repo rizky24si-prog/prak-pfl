@@ -2,10 +2,25 @@ import frameworkData from "./framework.json";
 import { useState } from "react";
 
 export default function FrameworklistSearchFilter() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedTag, setSelectedTag] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
+  // const [selectedTag, setSelectedTag] = useState("");
+
+  const [dataForm, setDataForm] = useState({
+			searchTerm: "",
+			selectedTag: "",
+			/*Tambah state lain beserta default value*/
+			});
+		
+		/*Inisialisasi Handle perubahan nilai input form*/
+		const handleChange = (evt) => {
+			const { name, value } = evt.target;
+			setDataForm({
+				...dataForm,
+				[name]: value,
+			});
+		};
 // ------------------------------------------------------------
-  const _searchTerm = searchTerm.toLowerCase();
+  const _searchTerm = dataForm.searchTerm.toLowerCase();
   const filteredFrameworks = frameworkData.filter((framework) => {
     const matchesSearch =
       framework.name.toLowerCase().includes(_searchTerm) ||
@@ -14,7 +29,7 @@ export default function FrameworklistSearchFilter() {
       framework.details.releaseYear.toString().includes(_searchTerm);
 
 
-    const matchesTag = selectedTag
+    const matchesTag = dataForm.selectedTag
       ? framework.tags.includes(selectedTag)
       : true;
 
@@ -40,18 +55,18 @@ export default function FrameworklistSearchFilter() {
         <input
               type="text"
               name="searchTerm"
+              onChange={handleChange}
               placeholder="Search framework..."
               className="w-full p-2 border border-gray-300 rounded mb-4 text-white"
-              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <select
               name="selectedTag"
+              onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded mb-4 text-white"
-              onChange={(e) => selectedTag(e.target.value)}
             >
               <option value="">All Tags</option>
   {allTags.map((tag, index) => (
-    <option key={index} value={tag}>
+    <option key={index} value={tag} className="text-black">
       {tag}
     </option>
   ))}
