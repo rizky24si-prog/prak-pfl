@@ -1,41 +1,49 @@
-import { useState } from "react";
+import React, { Suspense, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./assets/tailwind.css";
-import Sidebar from "./layouts/Sidebar";
-import Header from "./layouts/Header";
-import Dashboard from "./pages/Dashboard";
 import { Route, Routes } from "react-router-dom";
-import Orders from "./pages/Orders";
-import Customers from "./pages/Customers";
-import NotFound from "./pages/NotFound";
+import Loading from "./components/Loading";
+// import MainLayout from "./layouts/MainLayout";
+// import AuthLayout from "./layouts/AuthLayout";
+// import Orders from "./pages/Orders";
+// import Customers from "./pages/Customers";
+// import NotFound from "./pages/NotFound";
+// import Login from "./pages/auth/Login";
+// import Register from "./pages/auth/Register";
+// import Forgot from "./pages/auth/Forgot";
+
+const Dashboard = React.lazy(() => import("./pages/Dashboard"))
+const NotFound = React.lazy(() => import("./pages/NotFound"))
+const Orders = React.lazy(() => import("./pages/Orders"))
+const Customers = React.lazy(() => import("./pages/Customers"))
+const Login = React.lazy(() => import("./pages/auth/Login"))
+const Register = React.lazy(() => import("./pages/auth/Register"))
+const Forgot = React.lazy(() => import("./pages/auth/Forgot"))
+const AuthLayout = React.lazy(() => import("./layouts/AuthLayout"))
+const MainLayout = React.lazy(() => import("./layouts/MainLayout"))
+
+
 
 function App() {
   return (
-    <>
-      <div id="app-container" className="bg-gray-100 h-screen flex w-full">
-        <div
-          id="layout-wrapper"
-          className="flex flex-row flex-1 w-full overflow-hidden"
-        >
-          <Sidebar />
-          <div
-            id="main-content"
-            className="flex-1 flex flex-col overflow-y-auto"
-          >
-            <Header />
-            <div id="dashboard-wrapper" className="">
-              <Routes>
-                <Route path="*" element={<NotFound />} />
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/customers" element={<Customers />} />
-              </Routes>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    
+    <Suspense fallback={<Loading/>}>
+      <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="*" element={<NotFound />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/customers" element={<Customers />} />
+        <Route path="/" element={<Dashboard />} />
+      </Route>
+
+      <Route element={<AuthLayout/>}>
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/forgot" element={<Forgot/>} />
+      </Route>
+    </Routes>
+    </Suspense>
   );
 }
 
