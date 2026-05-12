@@ -163,7 +163,7 @@ export default function ProductsDetail() {
                                     Tambah Ke Keranjang
                                 </button>
                                 <button className="flex-1 px-4 py-2 rounded-xl border border-blue-600/50 text-blue-300 font-semibold hover:bg-blue-600/20 transition-all duration-300">
-                                    Beli Sekarang
+                                    Beli Sekaranggit
                                 </button>
                             </div>
                         </div>
