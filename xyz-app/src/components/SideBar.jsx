@@ -10,6 +10,8 @@ export default function SideBar() {
         { id: "1", link : "/", name: "Dashboard", icon: <FiHome /> },
         { id: "2", link : "/orders", name: "Orders", icon: <FiShoppingCart /> },
         { id: "3", link : "/customers", name: "Customers", icon: <FiUsers /> },
+        { id: "4", link : "/products", name: "Products", icon: <FiShoppingCart /> },
+
     ];
 
     const handleAddMenu = () => {
